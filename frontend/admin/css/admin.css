@@ -231,3 +231,74 @@
 @media (max-width: 900px) {
     .admin-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   TELA DE LOGIN
+============================================================ */
+.login-page {
+    background-color: var(--bg-alt);
+}
+
+.login-wrap {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    display: grid;
+    gap: 16px;
+}
+
+.login-card h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+.login-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.login-logo i { font-size: 1.8rem; }
+
+.login-sub {
+    color: var(--text-muted);
+    margin-top: -8px;
+}
+
+.login-card .admin-msg { margin-bottom: 0; }
+
+.login-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    justify-self: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.login-voltar:hover { color: var(--primary); }
+
+/* Usuário logado na barra superior do dashboard */
+.usuario-logado {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.btn-sair {
+    border-color: #dc2626;
+    color: #dc2626;
+}

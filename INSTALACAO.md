@@ -138,7 +138,13 @@ npm run seed
 
 > Também dá para abrir o `index.html` com dois cliques, mas o Live Server é mais confiável.
 
-**Painel administrativo:** clique em **Painel Administrativo** no rodapé do site, ou acesse `http://127.0.0.1:5500/admin/index.html`. Por ele dá para cadastrar, editar e excluir serviços, solicitações, notícias e eventos sem usar o Insomnia.
+**Painel administrativo:** clique em **Painel Administrativo** no rodapé do site, ou acesse `http://127.0.0.1:5500/admin/index.html`, e entre com:
+
+| E-mail | Senha |
+|---|---|
+| `admin@planejamentocanoinhas.com.br` | `admin123` |
+
+Esse usuário é criado automaticamente na primeira vez que a API inicia. Pelo painel dá para cadastrar, editar e excluir serviços, solicitações, notícias e eventos sem usar o Insomnia.
 
 Para conferir se o site está consumindo a API, aperte **F12 → aba Network (Rede)** e recarregue a página. Devem aparecer as requisições para `servicos`, `noticias` e `eventos`, todas com status **200**.
 
@@ -152,6 +158,14 @@ Para conferir se o site está consumindo a API, aperte **F12 → aba Network (Re
 | POST | `http://localhost:3000/api/servicos` |
 | PUT | `http://localhost:3000/api/servicos/1` |
 | DELETE | `http://localhost:3000/api/servicos/1` |
+
+**As rotas de POST, PUT e DELETE (e a leitura de solicitações) exigem login.** Antes delas:
+
+1. Faça `POST http://localhost:3000/api/login` com o corpo `{ "email": "admin@planejamentocanoinhas.com.br", "senha": "admin123" }`.
+2. Copie o valor de `token` da resposta.
+3. Nas outras requisições, abra a aba **Auth → Bearer Token** e cole o token. Também dá para usar a aba **Headers**, com `Authorization: Bearer <token>`.
+
+Sem o token, a API responde **401**.
 
 Nos métodos POST e PUT, use **Body → JSON**. Os exemplos de corpo estão no [README](README.md#exemplos-de-corpo-json).
 
@@ -180,6 +194,8 @@ Depois, abra `frontend/index.html` com o **Live Server**.
 | `password authentication failed for user "postgres"` | Senha errada em `database.js` | Coloque a senha correta do PostgreSQL |
 | `database "planejamento_canoinhas_db" does not exist` | O banco não foi criado | Faça o passo 3.1 |
 | `connect ECONNREFUSED 127.0.0.1:5432` | O PostgreSQL não está rodando | Abra **Serviços do Windows** e inicie o serviço `postgresql-x64-XX` |
+| `Cannot find module 'bcryptjs'` ou `'jsonwebtoken'` | Dependências novas não instaladas | Rode `npm install` na pasta `backend` |
+| Painel volta sempre para o login / API responde 401 | Token ausente ou expirado (dura 1 dia) | Faça login de novo. No Insomnia, gere um novo token em `POST /api/login` |
 | `'nodemon' não é reconhecido` | Dependências não instaladas | Rode `npm install` na pasta `backend` |
 | `Cannot find module 'express'` | Dependências não instaladas | Rode `npm install` na pasta `backend` |
 | `EADDRINUSE: address already in use :::3000` | A API já está rodando em outro terminal | Feche o outro terminal ou finalize o processo `node` |

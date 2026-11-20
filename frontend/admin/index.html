@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo — Planejamento Canoinhas</title>
+    <title>Login — Painel Planejamento Canoinhas</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,89 +11,42 @@
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Reaproveita as variáveis de cor, botões e inputs do site -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body>
+<body class="login-page">
 
-<!-- ============================
-     BARRA SUPERIOR
-============================= -->
-<header class="admin-header">
-    <div class="admin-header-inner">
-        <a href="../index.html" class="logo">
+<main class="login-wrap">
+    <section class="admin-card login-card">
+        <a href="../index.html" class="login-logo">
             <i class="ph ph-buildings"></i>
-            <span>PAINEL ADMINISTRATIVO</span>
+            <span>PLANEJAMENTO DE CONSTRUÇÕES CANOINHAS</span>
         </a>
-        <div class="admin-header-actions">
-            <button id="theme-toggle" class="icon-btn" aria-label="Trocar tema">
-                <i class="ph ph-moon"></i>
+
+        <h1>Painel administrativo</h1>
+        <p class="login-sub">Entre com sua conta para gerenciar serviços, solicitações, notícias e eventos.</p>
+
+        <!-- Mensagem de erro do login (ex.: senha incorreta) -->
+        <div id="mensagem" class="admin-msg erro" role="alert" hidden></div>
+
+        <form id="form-login" novalidate>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" autocomplete="username" placeholder="admin@planejamentocanoinhas.com.br" required>
+            </div>
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" autocomplete="current-password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-full" id="btn-entrar">
+                <i class="ph ph-sign-in"></i> Entrar
             </button>
-            <a href="../index.html" class="btn btn-outline">
-                <i class="ph ph-arrow-left"></i> Voltar ao site
-            </a>
-        </div>
-    </div>
-</header>
+        </form>
 
-<main class="admin-main">
-
-    <!-- ============================
-         ABAS: uma para cada entidade (tabela do banco)
-    ============================= -->
-    <nav class="admin-tabs" id="admin-tabs" aria-label="Cadastros">
-        <button class="tab active" data-entidade="servicos"><i class="ph ph-briefcase"></i> Serviços</button>
-        <button class="tab" data-entidade="solicitacoes"><i class="ph ph-envelope-simple"></i> Solicitações</button>
-        <button class="tab" data-entidade="noticias"><i class="ph ph-newspaper"></i> Notícias</button>
-        <button class="tab" data-entidade="eventos"><i class="ph ph-calendar"></i> Eventos</button>
-    </nav>
-
-    <!-- Mensagens de retorno da API (sucesso / erro + status HTTP) -->
-    <div id="mensagem" class="admin-msg" role="status" hidden></div>
-
-    <div class="admin-grid">
-
-        <!-- ============================
-             FORMULÁRIO: cadastro (POST) e edição (PUT)
-             Os campos são gerados pelo admin.js conforme a aba escolhida
-        ============================= -->
-        <section class="admin-card">
-            <h2 id="form-titulo">Novo serviço</h2>
-            <form id="form-cadastro" novalidate>
-                <div id="form-campos"></div>
-                <div class="form-acoes">
-                    <button type="submit" class="btn btn-primary" id="btn-salvar">
-                        <i class="ph ph-floppy-disk"></i> Cadastrar
-                    </button>
-                    <button type="button" class="btn btn-outline" id="btn-cancelar" hidden>
-                        Cancelar edição
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- ============================
-             TABELA: listagem (GET) com botões de editar e excluir (DELETE)
-        ============================= -->
-        <section class="admin-card">
-            <div class="tabela-topo">
-                <h2 id="tabela-titulo">Serviços cadastrados</h2>
-                <span class="contador" id="contador">0 registros</span>
-            </div>
-            <div class="tabela-wrap">
-                <table class="data-table">
-                    <thead id="tabela-head"></thead>
-                    <tbody id="tabela-body">
-                        <tr><td class="vazio">Carregando...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-    </div>
+        <a href="../index.html" class="login-voltar"><i class="ph ph-arrow-left"></i> Voltar ao site</a>
+    </section>
 </main>
 
-<script src="js/admin.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>

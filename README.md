@@ -15,6 +15,7 @@ Aplicação Web **Full Stack** desenvolvida para o Trabalho Avaliativo 3 da disc
 | Banco de dados | PostgreSQL |
 | ORM | Sequelize 6 |
 | Backend (API) | Node.js + Express 5 (JavaScript) |
+| Autenticação | JWT (`jsonwebtoken`) + hash de senha (`bcryptjs`) |
 | Frontend | HTML5, CSS3 e JavaScript puro (`fetch()`) |
 | Ícones / Fontes | Phosphor Icons e Google Fonts |
 
@@ -37,24 +38,31 @@ planejamento_canoinhas-main/
 │       ├── config/
 │       │   └── database.js    ← conexão com o PostgreSQL
 │       ├── database/
-│       │   └── seed.js        ← carga inicial de dados de teste
+│       │   └── seed.js        ← carga inicial de dados de teste + admin padrão
+│       ├── middlewares/
+│       │   └── auth.js        ← confere o token JWT nas rotas protegidas
+│       ├── utils/
+│       │   └── tratarErro.js  ← decide entre 400 e 500
 │       ├── models/            ← CAMADA DE MODELO (tabelas)
 │       │   ├── index.js       ← relacionamentos entre os models
 │       │   ├── Servico.js
 │       │   ├── Solicitacao.js
 │       │   ├── Noticia.js
-│       │   └── Evento.js
+│       │   ├── Evento.js
+│       │   └── Usuario.js     ← administradores (login)
 │       ├── controllers/       ← CAMADA DE CONTROLE (regras e respostas HTTP)
 │       │   ├── ServicoController.js
 │       │   ├── SolicitacaoController.js
 │       │   ├── NoticiaController.js
-│       │   └── EventController.js
+│       │   ├── EventController.js
+│       │   └── AuthController.js  ← POST /login, gera o token
 │       └── routes/            ← CAMADA DE ROTAS (URLs → controllers)
 │           ├── index.js       ← agrupa todas as rotas em /api
 │           ├── ServicoRoutes.js
 │           ├── SolicitacaoRoutes.js
 │           ├── NoticiaRoutes.js
-│           └── EventRoutes.js
+│           ├── EventRoutes.js
+│           └── AuthRoutes.js
 │
 └── frontend/                  ← site que consome a API
     ├── index.html             ← site público
@@ -62,9 +70,12 @@ planejamento_canoinhas-main/
     ├── js/script.js           ← chamadas fetch() e renderização dinâmica
     ├── img/
     └── admin/                 ← painel administrativo (CRUD completo)
-        ├── index.html
+        ├── index.html         ← tela de login
+        ├── dashboard.html     ← painel (exige login)
         ├── css/admin.css
-        └── js/admin.js        ← GET, POST, PUT e DELETE via fetch()
+        └── js/
+            ├── login.js       ← POST /login e salva o token
+            └── admin.js       ← GET, POST, PUT e DELETE com o token
 ```
 
 ### Como as camadas funcionam juntas
@@ -147,6 +158,36 @@ As 4 entidades têm o CRUD completo:
 
 As rotas `/solicitacoes`, `/noticias` e `/eventos` seguem o mesmo padrão.
 
+### Autenticação (rotas protegidas)
+
+As rotas que alteram dados exigem um **token JWT**, igual ao projeto CodeSchool. O token é obtido no login:
+
+**POST /api/login**
+```json
+{ "email": "admin@planejamentocanoinhas.com.br", "senha": "admin123" }
+```
+Resposta **200**:
+```json
+{ "usuario": { "id": 1, "nome": "Administrador", "email": "admin@planejamentocanoinhas.com.br" },
+  "token": "eyJhbGciOiJIUzI1NiIs..." }
+```
+
+Nas rotas protegidas, envie o token no cabeçalho: `Authorization: Bearer <token>`. O token vale **1 dia**.
+
+| Rota | GET | POST | PUT | DELETE |
+|---|---|---|---|---|
+| `/servicos` | 🔓 | 🔒 | 🔒 | 🔒 |
+| `/noticias` | 🔓 | 🔒 | 🔒 | 🔒 |
+| `/eventos` | 🔓 | 🔒 | 🔒 | 🔒 |
+| `/solicitacoes` | 🔒 | 🔓 (formulário de contato) | 🔒 | 🔒 |
+| `/login` | — | 🔓 | — | — |
+
+🔓 pública · 🔒 exige token
+
+O **`authMiddleware`** (`backend/src/middlewares/auth.js`) é colocado na rota **antes** do controller, por exemplo `router.post('/', authMiddleware, ServicoController.criar)`. Ele confere o token com `jwt.verify`: se o token for válido, chama `next()` e o controller roda; se não, responde **401** e o controller nem é executado.
+
+O administrador padrão é criado automaticamente na primeira vez que a API inicia. A senha é salva como **hash bcrypt**, nunca em texto puro.
+
 ### Códigos de status usados
 
 | Código | Quando acontece |
@@ -154,6 +195,7 @@ As rotas `/solicitacoes`, `/noticias` e `/eventos` seguem o mesmo padrão.
 | **200** OK | Listagem, busca, atualização ou exclusão feitas com sucesso |
 | **201** Created | Registro criado com sucesso (POST) |
 | **400** Bad Request | Campo obrigatório faltando, `servico_id` inexistente, e-mail ou status inválido, data ou ID em formato inválido, JSON mal formatado, ou exclusão bloqueada |
+| **401** Unauthorized | Rota protegida sem token, token inválido/expirado, ou login com e-mail/senha incorretos |
 | **404** Not Found | ID não encontrado ou rota inexistente |
 | **500** Internal Server Error | Erro inesperado no servidor ou no banco |
 
@@ -212,6 +254,14 @@ Se a API estiver desligada, o site continua mostrando o conteúdo HTML padrão e
 ## Painel administrativo
 
 Endereço: `frontend/admin/index.html` (também há um link no rodapé do site, **Painel Administrativo**).
+
+**Login:** `admin@planejamentocanoinhas.com.br` / `admin123`
+
+1. A **tela de login** (`index.html` + `login.js`) envia `POST /api/login`, recebe o token e o salva no `localStorage`.
+2. O **dashboard** (`dashboard.html` + `admin.js`) só abre se houver token salvo. Senão, volta para o login.
+3. Todas as requisições do dashboard enviam `Authorization: Bearer <token>`.
+4. Se a API responder **401** (token expirado), o painel apaga o token e volta para o login.
+5. O botão **Sair** apaga o token do navegador.
 
 O painel tem uma aba para cada entidade (**Serviços, Solicitações, Notícias e Eventos**). Cada aba tem um formulário e uma tabela, ambos gerados dinamicamente pelo `admin.js`:
 

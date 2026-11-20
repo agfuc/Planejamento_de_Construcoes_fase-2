@@ -15,6 +15,21 @@
 
 const API_BASE = 'http://localhost:3000/api';
 
+/* ----------------------------------------------------------------------------
+ * PROTEÇÃO DA PÁGINA: sem token salvo, volta para a tela de login.
+ * (O token é criado no login.js depois do POST /api/login.)
+ * -------------------------------------------------------------------------- */
+const TOKEN = localStorage.getItem('token');
+if (!TOKEN) {
+    window.location.replace('index.html');
+}
+
+function sair() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    window.location.replace('index.html');
+}
+
 const STATUS_SOLICITACAO = ['Pendente', 'Em andamento', 'Concluído', 'Cancelado'];
 
 /* ----------------------------------------------------------------------------
@@ -130,7 +145,9 @@ const mensagemEl = document.getElementById('mensagem');
  * lança um erro com o código HTTP e a mensagem enviada pelo backend.
  * -------------------------------------------------------------------------- */
 async function requisicao(metodo, caminho, corpo) {
-    const opcoes = { method: metodo, headers: {} };
+    // Todas as requisições do painel levam o token JWT no cabeçalho Authorization.
+    // É ele que o authMiddleware do backend confere.
+    const opcoes = { method: metodo, headers: { Authorization: `Bearer ${TOKEN}` } };
 
     if (corpo !== undefined) {
         opcoes.headers['Content-Type'] = 'application/json';
@@ -139,6 +156,12 @@ async function requisicao(metodo, caminho, corpo) {
 
     const res = await fetch(`${API_BASE}${caminho}`, opcoes);
     const dados = await res.json().catch(() => ({}));
+
+    // 401 = token ausente, inválido ou expirado (passou de 1 dia): faz login de novo
+    if (res.status === 401) {
+        sair();
+        throw new Error('Sessão expirada. Faça login novamente.');
+    }
 
     if (!res.ok) {
         // "detalhes" pode ser uma lista (erros de validação) ou um texto
@@ -454,6 +477,8 @@ document.getElementById('admin-tabs').addEventListener('click', (e) => {
 
 formEl.addEventListener('submit', salvar);
 
+document.getElementById('btn-sair').addEventListener('click', sair);
+
 btnCancelar.addEventListener('click', () => {
     formEl.reset();
     sairModoEdicao();
@@ -474,6 +499,16 @@ tabelaBody.addEventListener('click', (e) => {
  * INICIALIZAÇÃO
  * -------------------------------------------------------------------------- */
 (async function iniciar() {
+    if (!TOKEN) return; // já está sendo redirecionado para o login
+
+    // Mostra o nome de quem está logado (salvo pelo login.js)
+    try {
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        document.getElementById('usuario-nome').textContent = usuario.nome || 'Administrador';
+    } catch {
+        document.getElementById('usuario-nome').textContent = 'Administrador';
+    }
+
     iniciarTema();
     await carregarServicos();
     await trocarEntidade('servicos');

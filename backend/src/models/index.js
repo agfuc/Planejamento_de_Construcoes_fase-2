@@ -3,6 +3,7 @@ const Servico = require('./Servico');
 const Solicitacao = require('./Solicitacao');
 const Noticia = require('./Noticia');
 const Evento = require('./Evento');
+const Usuario = require('./Usuario'); // tabela independente (login do painel admin)
 
 /*
  * RELACIONAMENTOS (todos 1:N — "um para muitos")
@@ -35,5 +36,6 @@ module.exports = {
   Servico,
   Solicitacao,
   Noticia,
-  Evento
+  Evento,
+  Usuario
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./src/models');
 const routes = require('./src/routes');
-const popularBanco = require('./src/database/seed');
+const { popularBanco, criarAdminPadrao } = require('./src/database/seed');
 
 const app = express();
 const PORT = 3000;
@@ -39,6 +39,9 @@ sequelize.sync({ alter: true })
 
     // Carga inicial de dados de teste (só insere se o banco estiver vazio)
     await popularBanco();
+
+    // Usuário administrador do painel (só cria se ainda não existir)
+    await criarAdminPadrao();
 
     app.listen(PORT, () => {
       console.log(`Servidor a correr em http://localhost:${PORT}`);

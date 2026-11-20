@@ -13,7 +13,33 @@
  * ============================================================================
  */
 
-const { Servico, Noticia, Evento, Solicitacao } = require('../models');
+const bcrypt = require('bcryptjs');
+const { Servico, Noticia, Evento, Solicitacao, Usuario } = require('../models');
+
+// Credenciais do administrador padrão do painel
+const ADMIN_EMAIL = 'admin@planejamentocanoinhas.com.br';
+const ADMIN_SENHA = 'admin123';
+
+/*
+ * Cria o usuário administrador, caso ainda não exista (mesma ideia do CodeSchool).
+ * Roda SEMPRE na inicialização, independente dos outros dados de teste.
+ */
+async function criarAdminPadrao() {
+  const existente = await Usuario.findOne({ where: { email: ADMIN_EMAIL } });
+  if (existente) return;
+
+  // bcrypt.hash gera o hash da senha. O "10" é o custo (salt rounds):
+  // quanto maior, mais seguro e mais lento para calcular.
+  const senhaCriptografada = await bcrypt.hash(ADMIN_SENHA, 10);
+
+  await Usuario.create({
+    nome: 'Administrador',
+    email: ADMIN_EMAIL,
+    senha: senhaCriptografada
+  });
+
+  console.log(`Admin padrão criado: ${ADMIN_EMAIL} / ${ADMIN_SENHA}`);
+}
 
 async function popularBanco() {
   const total = await Servico.count();
@@ -81,7 +107,7 @@ async function popularBanco() {
   console.log('Seed concluído: 6 serviços, 3 notícias, 3 eventos e 3 solicitações cadastrados.');
 }
 
-module.exports = popularBanco;
+module.exports = { popularBanco, criarAdminPadrao };
 
 /*
  * Execução manual: "npm run seed"
@@ -93,6 +119,7 @@ if (require.main === module) {
   const { sequelize } = require('../models');
   sequelize.sync({ force: true })
     .then(popularBanco)
+    .then(criarAdminPadrao)
     .then(() => sequelize.close())
     .catch((erro) => {
       console.error('Erro ao executar o seed:', erro);
