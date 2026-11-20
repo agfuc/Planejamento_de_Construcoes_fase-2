@@ -26,6 +26,9 @@ Aplicação Web **Full Stack** desenvolvida para o Trabalho Avaliativo 3 da disc
 planejamento_canoinhas-main/
 ├── README.md                  ← este arquivo
 ├── INSTALACAO.md              ← guia de instalação
+├── docs/
+│   ├── diagrama-er.png        ← diagrama do banco (imagem)
+│   └── modelo-relacional.html ← diagrama do banco (página completa)
 │
 ├── backend/                   ← API RESTful
 │   ├── index.js               ← ponto de entrada: cria o servidor e sincroniza o banco
@@ -81,6 +84,10 @@ Navegador (fetch)  →  routes  →  controllers  →  models (Sequelize)  →  
 ## Modelo do banco de dados
 
 São 4 tabelas, todas relacionadas à tabela `servicos` por chave estrangeira (relações **1:N**, um para muitos).
+
+![Diagrama entidade-relacionamento](docs/diagrama-er.png)
+
+> A versão interativa do diagrama, com a tabela de relacionamentos e o código das associações, está em [`docs/modelo-relacional.html`](docs/modelo-relacional.html). Abra o arquivo no navegador.
 
 ```
                  ┌────────────────────┐
