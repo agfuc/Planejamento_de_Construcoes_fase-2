@@ -1,0 +1,233 @@
+/* ============================================================
+   PAINEL ADMINISTRATIVO
+   Usa as variáveis (--primary, --surface, --border...) do style.css,
+   por isso o modo escuro funciona automaticamente.
+============================================================ */
+
+/* Barra superior */
+.admin-header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.admin-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.admin-header .logo i { font-size: 1.8rem; }
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Área principal */
+.admin-main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Abas */
+.admin-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--surface);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.tab:hover { border-color: var(--primary); }
+
+.tab.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* Mensagem de retorno */
+.admin-msg {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    font-weight: 600;
+    border: 1px solid;
+}
+
+.admin-msg.sucesso { background: #dcfce7; color: #166534; border-color: #86efac; }
+.admin-msg.erro    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+/* Layout: formulário à esquerda, tabela à direita */
+.admin-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.admin-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    min-width: 0; /* permite que a tabela role dentro do card */
+}
+
+.admin-card h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+/* Campos do formulário (complementa .input-group do style.css) */
+.admin-card .input-group { margin-bottom: 14px; }
+
+.admin-card .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.obrigatorio { color: #dc2626; }
+
+.form-acoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Tabela */
+.tabela-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.contador {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.tabela-wrap {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.data-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.data-table tbody tr:hover { background-color: var(--bg-alt); }
+
+.data-table td.vazio {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 32px;
+}
+
+.texto-longo {
+    max-width: 320px;
+    color: var(--text-muted);
+}
+
+.acoes {
+    white-space: nowrap;
+}
+
+.btn-acao {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-main);
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.btn-acao:hover        { border-color: var(--primary); color: var(--primary); }
+.btn-acao.excluir:hover { border-color: #dc2626; color: #dc2626; }
+
+/* Selo de status das solicitações */
+.badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.badge.pendente     { background: #fef3c7; color: #92400e; }
+.badge.em-andamento { background: #dbeafe; color: #1e40af; }
+.badge.concluido    { background: #dcfce7; color: #166534; }
+.badge.cancelado    { background: #fee2e2; color: #991b1b; }
+
+/* Celular: formulário em cima, tabela embaixo */
+@media (max-width: 900px) {
+    .admin-grid { grid-template-columns: 1fr; }
+}

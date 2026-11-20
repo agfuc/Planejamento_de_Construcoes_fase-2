@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento de Construções Canoinhas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ============================
+     HEADER / NAVBAR
+============================= -->
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="#home" class="logo">
+            <i class="ph ph-buildings"></i>
+            <span>PLANEJAMENTO DE CONSTRUÇÕES CANOINHAS</span>
+        </a>
+
+        <nav class="nav" id="nav">
+            <ul class="nav-list">
+                <li><a href="#home"     class="nav-link">Home</a></li>
+                <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                <li><a href="#numeros"  class="nav-link">Sobre</a></li>
+                <li><a href="#novidades" class="nav-link">Novidades</a></li>
+                <li><a href="#contato"  class="nav-link">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <button id="theme-toggle" class="icon-btn" aria-label="Trocar tema">
+                <i class="ph ph-moon"></i>
+            </button>
+            <a href="#contato" class="btn btn-primary d-none-mobile">Solicitar Orçamento</a>
+            <button class="icon-btn menu-btn" id="menu-btn" aria-label="Abrir menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- ============================
+     SEÇÃO 1 — HOME / SLIDER
+============================= -->
+<section id="home" class="hero">
+    <div id="carousel" class="carousel">
+
+        <div class="carousel-slide active">
+            <img src="img/img_01.jpg" alt="Canteiro de obras" class="carousel-bg">
+            <div class="carousel-content">
+                <span class="slide-tag">Planejamento Estratégico</span>
+                <h1>Planejamento e<br>Projetos de Obra</h1>
+                <p>Transformamos suas ideias em projetos concretos,<br>seguros e eficientes do início ao fim.</p>
+                <a href="#servicos" class="btn btn-primary">Conhecer Soluções</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="img/img_02.jpg" alt="Execução de obras" class="carousel-bg">
+            <div class="carousel-content">
+                <span class="slide-tag">Execução com Qualidade</span>
+                <h1>Gestão de Obras<br>com Eficiência</h1>
+                <p>Gerenciamento completo de recursos, equipes e<br>prazos com metodologia comprovada.</p>
+                <a href="#servicos" class="btn btn-primary">Nossos Serviços</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="img/img_07.jpg" alt="Projetos técnicos" class="carousel-bg">
+            <div class="carousel-content">
+                <span class="slide-tag">Orçamento Transparente</span>
+                <h1>Orçamento e<br>Controle de Custos</h1>
+                <p>Clareza total nos gastos e supervisão detalhada<br>em cada etapa da sua construção.</p>
+                <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="img/img_04.jpg" alt="Compatibilização BIM" class="carousel-bg">
+            <div class="carousel-content">
+                <span class="slide-tag">Tecnologia BIM</span>
+                <h1>Compatibilização<br>de Projetos BIM</h1>
+                <p>Modelagem 3D inteligente que elimina conflitos<br>e evita desperdícios antes da obra começar.</p>
+                <a href="#servicos" class="btn btn-primary">Ver Detalhes</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="img/img_06.jpg" alt="Vitrine de excelência" class="carousel-bg">
+            <div class="carousel-content">
+                <span class="slide-tag">Excelência Comprovada</span>
+                <h1>Construções<br>Sólidas e Inovadoras</h1>
+                <p>Da planta ao acabamento: entregamos obras com<br>qualidade técnica e visual impecável.</p>
+                <a href="#novidades" class="btn btn-primary">Últimas Novidades</a>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="carousel-control prev" id="btn-prev" aria-label="Slide anterior">
+        <i class="ph ph-caret-left"></i>
+    </button>
+    <button class="carousel-control next" id="btn-next" aria-label="Próximo slide">
+        <i class="ph ph-caret-right"></i>
+    </button>
+
+    <div class="carousel-dots" id="carousel-dots"></div>
+</section>
+
+<!-- ============================
+     SEÇÃO 2 — SERVIÇOS / CARDS
+============================= -->
+<section id="servicos" class="section bg-alt">
+    <div class="container">
+        <div class="section-title">
+            <h2>Nossos Serviços</h2>
+            <div class="line"></div>
+            <p>Soluções completas para o planejamento, gestão e execução da sua obra com excelência técnica.</p>
+        </div>
+        <div class="grid grid-cards">
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-blueprint"></i>
+                </div>
+                <h3>Planejamento de Obras</h3>
+                <p>Desenvolvemos o plano completo da sua construção: escopo, cronograma, recursos e orçamento detalhado para garantir entregas no prazo.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-calendar-check"></i>
+                </div>
+                <h3>Gestão de Cronogramas</h3>
+                <p>Acompanhamento em tempo real de todas as etapas da obra. Identificamos desvios e tomamos ações corretivas antes que impactem o projeto.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-cube"></i>
+                </div>
+                <h3>Compatibilização BIM</h3>
+                <p>Integração entre projetos arquitetônicos, estruturais e de instalações em modelo 3D, eliminando conflitos e reduzindo custos imprevistos.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-currency-dollar"></i>
+                </div>
+                <h3>Orçamento Executivo</h3>
+                <p>Elaboração de orçamentos precisos com memória de cálculo completa, composições unitárias e controle de custos durante toda a execução.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-hard-hat"></i>
+                </div>
+                <h3>Fiscalização de Obras</h3>
+                <p>Acompanhamento técnico presencial e remoto para garantir que a obra seja executada dentro das normas, especificações e padrões de qualidade.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+            <article class="card">
+                <div class="card-icon-wrapper">
+                    <i class="ph ph-chart-line-up"></i>
+                </div>
+                <h3>Relatórios Gerenciais</h3>
+                <p>Dashboards e relatórios periódicos com indicadores de desempenho, progresso físico-financeiro e previsões para tomada de decisão assertiva.</p>
+                <a href="#contato" class="btn btn-outline">Saiba Mais</a>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     SEÇÃO 3 — NÚMEROS / STATS
+============================= -->
+<section id="numeros" class="section stats-section">
+    <div class="container">
+        <div class="section-title title-light">
+            <h2>Planejamento de Construções Canoinhas em Números</h2>
+            <div class="line"></div>
+            <p>Resultados que comprovam nossa experiência e comprometimento com cada projeto.</p>
+        </div>
+        <div class="grid grid-stats">
+            <div class="stat-box">
+                <i class="ph ph-buildings"></i>
+                <span class="stat-num" data-target="30">0</span>
+                <p>Projetos Concluídos</p>
+            </div>
+            <div class="stat-box">
+                <i class="ph ph-hard-hat"></i>
+                <span class="stat-num" data-target="45">0</span>
+                <p>Obras Gerenciadas</p>
+            </div>
+            <div class="stat-box">
+                <i class="ph ph-users"></i>
+                <span class="stat-num" data-target="30">0</span>
+                <p>Clientes Satisfeitos</p>
+            </div>
+            <div class="stat-box">
+                <i class="ph ph-medal"></i>
+                <span class="stat-num" data-target="8">0</span>
+                <p>Anos de Experiência</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     SEÇÃO 4 — NOVIDADES
+     (Notícias + Eventos)
+============================= -->
+<section id="novidades" class="section">
+    <div class="container grid dual-layout">
+
+        <!-- Coluna 1: Notícias -->
+        <div class="news-container" id="noticias">
+            <h3 class="box-title">Recentes no Blog</h3>
+
+            <article class="news-item">
+                <img src="img/img_03.jpg" alt="Construções Inteligentes" class="news-img">
+                <div class="news-text">
+                    <h4>Construções Inteligentes: o futuro das obras urbanas</h4>
+                    <span class="news-date">11 de maio, 2026</span>
+                    <p>Como tecnologia BIM e IoT estão revolucionando o gerenciamento de grandes empreendimentos nas cidades.</p>
+                </div>
+            </article>
+
+            <article class="news-item">
+                <img src="img/img_05.jpg" alt="Gestão de Custos" class="news-img">
+                <div class="news-text">
+                    <h4>Gestão de custos: como evitar estouros de orçamento</h4>
+                    <span class="news-date">28 de abril, 2026</span>
+                    <p>Principais erros no planejamento financeiro de obras e as melhores práticas para manter o controle do investimento.</p>
+                </div>
+            </article>
+        </div>
+
+        <!-- Coluna 2: Eventos -->
+        <div class="events-container" id="eventos">
+            <h3 class="box-title">Próximos Eventos</h3>
+
+            <div class="event-item">
+                <div class="event-calendar">
+                    <span class="day">15</span>
+                    <span class="month">NOV</span>
+                </div>
+                <div class="event-text">
+                    <h4>Bate Papo: Construção do Futuro</h4>
+                    <span class="event-meta">
+                        <i class="ph ph-map-pin"></i> CREA-SC &nbsp;|&nbsp;
+                        <i class="ph ph-clock"></i> 19h30
+                    </span>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <div class="event-calendar">
+                    <span class="day">03</span>
+                    <span class="month">DEZ</span>
+                </div>
+                <div class="event-text">
+                    <h4>Workshop: BIM na Prática para Gestores</h4>
+                    <span class="event-meta">
+                        <i class="ph ph-map-pin"></i> Online &nbsp;|&nbsp;
+                        <i class="ph ph-clock"></i> 14h00
+                    </span>
+                </div>
+            </div>
+
+            <div class="event-item">
+                <div class="event-calendar">
+                    <span class="day">25</span>
+                    <span class="month">DEZ</span>
+                </div>
+                <div class="event-text">
+                    <h4>Recesso de Natal — Boas Festas!</h4>
+                    <span class="event-meta">
+                        <i class="ph ph-map-pin"></i> Sua Casa &nbsp;|&nbsp;
+                        <i class="ph ph-clock"></i> 00h00
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================
+     SEÇÃO 5 — CONTATO
+============================= -->
+<section id="contato" class="section bg-alt">
+    <div class="container grid contact-layout">
+
+        <div class="contact-info">
+            <h2>Vamos construir<br>juntos?</h2>
+            <p>Nossa equipe está pronta para analisar seu projeto e apresentar a melhor solução. Entre em contato e solicite um orçamento sem compromisso.</p>
+            <ul class="contact-list">
+                <li>
+                    <i class="ph ph-envelope-simple"></i>
+                    planejamento@planejamentocanoinhas.com.br
+                </li>
+                <li>
+                    <i class="ph ph-phone"></i>
+                    (47) 99162-4812
+                </li>
+                <li>
+                    <i class="ph ph-map-pin"></i>
+                    Rua Basilio Humenhuck, 187 — Canoinhas/SC
+                </li>
+            </ul>
+        </div>
+
+        <div class="contact-form">
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="input-group">
+                    <label for="nome">Como devemos te chamar?</label>
+                    <input type="text" id="nome" placeholder="Seu nome completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="servico-select">Serviço de interesse</label>
+                    <select id="servico-select" required>
+                        <option value="">Carregando serviços...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="email">E-mail para contato</label>
+                    <input type="email" id="email" placeholder="seu@email.com.br" required>
+                </div>
+                <div class="input-group">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="tel" id="telefone" placeholder="(49) 99999-9999">
+                </div>
+                <div class="input-group">
+                    <label for="msg">Descreva seu projeto</label>
+                    <textarea id="msg" rows="4" placeholder="Ex.: Preciso de planejamento para construção de galpão industrial de 500m²..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-full">
+                    <i class="ph ph-paper-plane-tilt"></i> Enviar Mensagem
+                </button>
+                <p class="form-success" id="form-success">✅ Mensagem enviada! Entraremos em contato em breve.</p>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+<!-- ============================
+     FOOTER
+============================= -->
+<footer class="footer">
+    <div class="container grid footer-grid">
+        <div class="brand-col">
+            <a href="#home" class="logo">
+                <i class="ph ph-buildings"></i>
+                <span>PLANEJAMENTO DE CONSTRUÇÕES CANOINHAS</span>
+            </a>
+            <p>Soluções modernas para planejamento, gestão e execução de obras com excelência técnica e comprometimento.</p>
+        </div>
+
+        <div class="link-col">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#servicos">Nossos Serviços</a></li>
+                <li><a href="#numeros">Sobre Nós</a></li>
+            </ul>
+        </div>
+
+        <div class="link-col">
+            <h4>Conteúdo</h4>
+            <ul>
+                <li><a href="#novidades">Blog & Notícias</a></li>
+                <li><a href="#novidades">Agenda de Eventos</a></li>
+                <li><a href="#contato">Fale Conosco</a></li>
+                <li><a href="admin/index.html">Painel Administrativo</a></li>
+            </ul>
+        </div>
+
+        <div class="social-col">
+            <h4>Acompanhe</h4>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="ph ph-whatsapp-logo"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Planejamento de Construções Canoinhas — Todos os direitos reservados. Desenvolvido por: Alexandre</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
