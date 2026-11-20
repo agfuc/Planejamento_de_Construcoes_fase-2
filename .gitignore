@@ -11,3 +11,6 @@ npm-debug.log*
 # Sistema operacional
 .DS_Store
 Thumbs.db
+
+# Material pessoal (não publicar)
+ROTEIRO_APRESENTACAO.md
